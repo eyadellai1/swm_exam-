@@ -1,6 +1,6 @@
 # tests/test_ldexp.py
-from ldexp_function import tracked_ldexp, coverage_tracker
-from coverage_tracker import print_coverage_report
+from src.ldexp_function import tracked_ldexp, coverage_tracker
+from src.coverage_tracker import print_coverage_report
 
 class TestMathLdexp:
     def test_positive_numbers(self):
