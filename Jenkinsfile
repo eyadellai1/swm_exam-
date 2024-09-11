@@ -4,23 +4,28 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                git 'https://your-repo-url.git'
+                git 'https://github.com/eyadellai1/swm_exam-'
             }
         }
-        stage('Install Python') {
+        stage('Install Dependencies') {
             steps {
-                sh 'apt-get update && apt-get install -y python3'
+                sh '''
+                    sudo apt-get update
+                    sudo apt-get install -y python3 python3-pip
+                    pip3 install --upgrade pip
+                    pip3 install -r requirements.txt
+                '''
             }
         }
         stage('Run Tests') {
             steps {
-                sh 'python3 -m pytest tests/test_ldexp.py'
+                sh 'python3 -m pytest --cov=src tests/test_ldexp.py --cov-report=term --cov-report=html'
             }
         }
     }
     post {
         always {
-            archiveArtifacts artifacts: 'coverage-report.txt', allowEmptyArchive: true
+            archiveArtifacts artifacts: '**/htmlcov/index.html', allowEmptyArchive: true
         }
     }
 }
