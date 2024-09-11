@@ -26,5 +26,5 @@ if __name__ == '__main__':
     test.test_zero_x()
     test.test_large_i()
 
+    print(coverage_tracker)
 
-    print_coverage_report(coverage_tracker)
